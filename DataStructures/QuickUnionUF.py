@@ -1,40 +1,28 @@
-class WeightedPathCompressionQuickUnionUF():
+class QuickUnionUF():
     def __init__(self, n):
         self.n = n
         self.ar = [i for i in range(self.n)]
-        self.weights = [1 for i in range(self.n)]
     
     def union(self, p, q):
         root_p = self._find_root(p)
-        root_q = self._find_root(q)
-        if root_p != root_q:
-            if self.weights[p] <= self.weights[q]:
-                # p is in smaller or equal tree
-                self.ar[root_p] = root_q
-                self.weights[root_q] += self.weights[root_p]
-            else:
-                # q is in smaller tree
-                self.ar[root_q] = root_p
-                self.weights[root_p] += self.weights[root_q]
+        self.ar[root_p] = self._find_root(q)
         return
     
     def connected(self, p, q):
-        con = False
+        in_same_com = False
         if self._find_root(p) == self._find_root(q):
-            con = True
-        return con
+            in_same_com = True
+        return in_same_com
     
     def _find_root(self, a):
-        root = None
-        parent = self.ar[a]
-        while parent != self.ar[a]:
-            self.ar[a] = self.ar[self.ar[a]] # The PATH COMPRESSION LINE
-            parent = self.ar[parent]
-        root = parent
+        root = a
+        while a != self.ar[a]:
+            a = self.ar[a]
+        root = a
         return root
 
 def main():
-    uf = WeightedPathCompressionQuickUnionUF(10)
+    uf = QuickUnionUF(10)
     print("Initial Quick Find UF:")
     print(uf.ar)
     uf.union(4, 3)
@@ -63,4 +51,7 @@ def main():
     print("Final Quick Find UF:")
     print(uf.ar)
 
-main()
+"""
+Uncomment the following line to run the file.
+"""
+#main()

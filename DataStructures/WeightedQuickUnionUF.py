@@ -61,4 +61,7 @@ def main():
     print("Final Quick Find UF:")
     print(uf.ar)
 
-main()
+"""
+Uncomment the following line to run the file.
+"""
+#main()
