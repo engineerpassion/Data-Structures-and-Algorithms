@@ -1,9 +1,6 @@
-class DoublyLinkedListElement():
-    def __init__(self, value):
-        self.value = value
-        self.prev = self.next = None
+from DoublyLinkedList import DoublyLinkedListElement
 
-class DoublyLinkedList():
+class DoublyCircularLinkedList():
     def __init__(self):
         self.head = None
         self.tail = None
@@ -19,9 +16,13 @@ class DoublyLinkedList():
         if self.is_empty():
             self.head = element
             self.tail = element
+            self.head.next = self.tail
+            self.tail.prev = self.head
         else:
             self.tail.next = element
             element.prev = self.tail
+            element.next = self.head
+            self.head.prev = element
             self.tail = element
         return
     
@@ -40,14 +41,16 @@ class DoublyLinkedList():
                 if self.head.value == value:
                     temp = self.head
                     self.head = self.head.next
-                    self.head.prev = None
+                    self.head.prev = self.tail
+                    self.tail.next = self.head
                     del temp
                     deleted = True
                 # Checking on tail
                 elif self.tail.value == value:
                     temp = self.tail
                     self.tail = self.tail.prev
-                    self.tail.next = None
+                    self.tail.next = self.head
+                    self.head.prev = self.tail
                     del temp
                     deleted = True
                 # Checking on the rest of the Doubly Linked List
@@ -68,45 +71,44 @@ class DoublyLinkedList():
     def traverse(self):
         s = ""
         temp = self.head
-        while temp is not None:
-            s += str(temp.value)
+        while temp.next != self.head:
+            s += str(temp.value) + "->"
             temp = temp.next
-            if temp is not None:
-                s += "->"
+        s += str(temp.value)
         print(s)
         return
 
 def main():
-    dl = DoublyLinkedList()
-    print("Created an empty Doubly Linked List!")
+    dcll = DoublyCircularLinkedList()
+    print("Created an empty Doubly Circular Linked List!")
     print("Adding 1.")
-    dl.add(1)
-    print("Doubly Linked list looks as follows:")
-    dl.traverse()
+    dcll.add(1)
+    print("Doubly Circular Linked list looks as follows:")
+    dcll.traverse()
     print("Adding 2.")
-    dl.add(2)
-    print("Doubly Linked list looks as follows:")
-    dl.traverse()
+    dcll.add(2)
+    print("Doubly Circular Linked list looks as follows:")
+    dcll.traverse()
     print("Adding 3.")
-    dl.add(3)
+    dcll.add(3)
     print("Adding 4.")
-    dl.add(4)
+    dcll.add(4)
     print("Adding 5.")
-    dl.add(5)
-    print("Doubly Linked list looks as follows:")
-    dl.traverse()
+    dcll.add(5)
+    print("Doubly Circular Linked list looks as follows:")
+    dcll.traverse()
     print("Removing 3.")
-    dl.delete(3)
-    print("Doubly Linked list looks as follows:")
-    dl.traverse()
+    dcll.delete(3)
+    print("Doubly Circular Linked list looks as follows:")
+    dcll.traverse()
     print("Removing 4.")
-    dl.delete(4)
-    print("Doubly Linked list looks as follows:")
-    dl.traverse()
+    dcll.delete(4)
+    print("Doubly Circular Linked list looks as follows:")
+    dcll.traverse()
     print("Removing 1.")
-    dl.delete(1)
-    print("Doubly Linked list looks as follows:")
-    dl.traverse()
+    dcll.delete(1)
+    print("Doubly Circular Linked list looks as follows:")
+    dcll.traverse()
 
 """
 Uncomment the following line to run the file.
