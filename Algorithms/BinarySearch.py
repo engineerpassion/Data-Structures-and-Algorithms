@@ -3,7 +3,7 @@ def binary_search(a, key):
     low = 0
     high = len(a) - 1
     while low <= high:
-        middle = int((low + high) / 2)
+        middle = (low + high) // 2
         if key > a[middle]:
             low = middle + 1
         elif key < a[middle]:
@@ -19,7 +19,7 @@ def recursive_binary_search(a, key, low=None, high=None):
         high = len(a)
     if low > high:
         return None
-    middle = int((low + high) / 2)
+    middle = (low + high) // 2
     if a[middle] > key:
         return recursive_binary_search(a, key, low, middle - 1)
     elif a[middle] < key:

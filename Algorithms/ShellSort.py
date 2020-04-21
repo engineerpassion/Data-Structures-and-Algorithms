@@ -23,7 +23,7 @@ def shell_sort(a):
             h = int(3 * h + 1)
         while h >= 1:
             a = h_sort(a, h)
-            h = int(h/3)
+            h = h // 3
     return a
 
 def main():
