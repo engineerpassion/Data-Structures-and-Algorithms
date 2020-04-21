@@ -39,7 +39,7 @@ def main():
     print("My list looks as follows:")
     print(a)
     a = merge_sort(a)
-    print("My sorted list using insertion sort looks as follows:")
+    print("My sorted list using merge sort looks as follows:")
     print(a)
 
 """
