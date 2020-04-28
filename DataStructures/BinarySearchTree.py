@@ -125,26 +125,6 @@ class BinarySearchTree():
                 temp_parent.left = temp.right
         return root
     
-    def delete_max(self, root=None):
-        root = self.root if root is not None else root
-        if root is not None:
-            temp = temp_parent = root
-            while temp.right is not None:
-                temp_parent = temp
-                temp = temp.right
-            if temp == temp_parent:
-                if temp.right is not None:
-                    root = temp.left
-                    del temp
-                else:
-                    # There is only one node (root) in the tree
-                    root = None
-                    del temp
-            else:
-                temp_parent.right = temp.left
-                del temp
-        return
-    
     def delete(self, value):
         if not self.is_empty():
             # Searching for the value in tree
@@ -292,8 +272,6 @@ def main():
     bst.preorder()
     print("Postorder looks as follows:")
     bst.postorder()
-    print("Deleting maximum value from tree!")
-    bst.delete_max()
     print("Inorder looks as follows:")
     bst.inorder()
     print("Preorder looks as follows:")
