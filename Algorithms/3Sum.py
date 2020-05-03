@@ -21,7 +21,8 @@ def modified_three_sum_count(a, sum_val):
             for j in range(i + 1, n):
                 val_to_find = sum_val - a[i] - a[j]
                 if a[i] < a[j] and a[j] < val_to_find: # To avoid duplicate counting
-                    if binary_search(a, val_to_find) is not None:
+                    k = binary_search(a, val_to_find)
+                    if k is not None and k != i and k != j:
                         count += 1
     return count
 
